@@ -1,11 +1,12 @@
-import {IPhoto} from '../../types';
+import {IPhoto, ValidationError} from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import {fetchPhotos} from "./photosThunk";
+import {createPhoto, fetchPhotos} from "./photosThunk";
 
 interface PhotosState {
     photos: IPhoto[];
     fetchLoading: boolean;
+    createError: ValidationError | null;
     createLoading: boolean;
     delLoading: boolean;
 }
@@ -13,6 +14,7 @@ interface PhotosState {
 const initialState: PhotosState = {
     photos: [],
     fetchLoading: false,
+    createError: null,
     createLoading: false,
     delLoading: false,
 };
@@ -35,17 +37,19 @@ export const PhotosSlice = createSlice({
             state.fetchLoading = false;
         });
 
-        // builder.addCase(createAlbum.pending, (state) => {
-        //     state.createLoading = true;
-        // });
-        //
-        // builder.addCase(createAlbum.fulfilled, (state) => {
-        //     state.createLoading = false;
-        // });
-        //
-        // builder.addCase(createAlbum.rejected, (state) => {
-        //     state.createLoading = false;
-        // });
+        builder.addCase(createPhoto.pending, (state) => {
+            state.createLoading = true;
+            state.createError = null;
+        });
+
+        builder.addCase(createPhoto.fulfilled, (state) => {
+            state.createLoading = false;
+        });
+
+        builder.addCase(createPhoto.rejected, (state, { payload: error }) => {
+            state.createLoading = false;
+            state.createError = error || null;
+        });
         //
         // builder.addCase(delAlbums.pending, (state) => {
         //     state.delLoading = true;
@@ -64,5 +68,6 @@ export const PhotosSlice = createSlice({
 export const photosReducer = PhotosSlice.reducer;
 export const selectPhotos = (state: RootState) => state.photos.photos;
 export const selectPhotosLoading = (state: RootState) => state.photos.fetchLoading;
+export const selectPhotosError = (state: RootState) => state.photos.createError;
 export const selectPhotosDel = (state: RootState) => state.photos.delLoading;
 export const selectPhotosCreateLoading = (state: RootState) => state.photos.createLoading;
