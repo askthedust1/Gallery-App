@@ -42,7 +42,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
             ) : (
                 <img className="user-ava" src="https://i.redd.it/v6fk4w7a76j91.png" alt={user.displayName} />
             )}
-            <Button component={Link} to={'/photos/' + user._id} onClick={handleClick} color="inherit">
+            <Button onClick={handleClick} sx={{color: 'white'}}>
                 Hello, {user.displayName}
             </Button>
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>

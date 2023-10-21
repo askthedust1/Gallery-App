@@ -9,8 +9,6 @@ import {selectPhotosCreateLoading, selectPhotosError} from "../photosSlice";
 import FileInput from "../../../components/UI/FileInput/FileInput";
 import {createPhoto} from "../photosThunk";
 
-
-
 const PhotoForm = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -27,9 +25,10 @@ const PhotoForm = () => {
 
         try {
             await dispatch(createPhoto(state)).unwrap();
+            setState({name: '', image: null});
             navigate('/');
         } catch (e) {
-            alert('Invalid field');
+            // nothing
         }
     };
 
@@ -52,35 +51,34 @@ const PhotoForm = () => {
         }
     };
 
-    const getFieldError = (name: string) => {
+    const getFieldError = () => {
         try {
-            return error?.errors[name].message;
+            return error?.error;
         } catch {
             return undefined;
         }
     };
 
     return (
-        <div style={{width:'40%', margin: '0 auto'}}>
+        <div style={{width:'40%', margin: '20px auto'}}>
             {error && (
                 <Alert severity="error" sx={{ mt: 3, width: '100%' }}>
-                    {error.message}
+                    {error.error}
                 </Alert>
             )}
             <form autoComplete="off" onSubmit={submitFormHandler} style={{ width: '100%' }}>
-                <h2 style={{ color: 'white' }}>Add cocktail</h2>
+                <h2 style={{ color: 'white', margin: '10px 0' }}>Add cocktail</h2>
                 <Grid container direction="column" spacing={2}>
                     <Grid item xs>
                         <TextField
-                            required
                             sx={{ width: '100%', background: 'white', borderRadius: 2 }}
                             id="name"
                             label="Name"
                             value={state.name}
                             onChange={inputChangeHandler}
                             name="name"
-                            error={Boolean(getFieldError('name'))}
-                            helperText={getFieldError('name')}
+                            error={Boolean(getFieldError())}
+                            helperText={getFieldError()}
                         />
                     </Grid>
 

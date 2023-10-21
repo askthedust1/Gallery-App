@@ -39,11 +39,14 @@ const UserPhoto = () => {
         <section>
             {loading ? <SpinnerLoading/> :
                 <div>
-                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                    <div style={{display: 'flex', justifyContent: 'center', marginTop:'30px'}}>
                         <h1
-                            style={{ fontSize: '30px'}}>
+                            style={{ fontSize: '30px', color: 'white'}} className="title">
                             {userPhotos[0]?.user.displayName}'s Gallery</h1>
-                        {user?._id === id ? <Button component={Link} to="/add_photo">Add new Photo</Button> : null}
+                        {user?._id === id ?
+                            <Button
+                                sx={{marginLeft: '20px', color: 'darkblue', background:'white'}}
+                                component={Link} to="/add_photo">Add new Photo</Button> : null}
                     </div>
                     <div className="wrap">
                         {userPhotos.map((item) => (

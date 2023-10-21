@@ -41,12 +41,12 @@ const PhotoItem: React.FC<IProps> = ({photo, openModal, isUser, id}) => {
 
             <div className="card-content">
                 <p>{photo.name}</p>
-                {isUser ? null : <Link to={'/photos/' + photo.user._id}>By: {photo.user.displayName}</Link>}
+                {isUser ? null : <Link to={'/photos/' + photo.user._id} className="name">By: {photo.user.displayName}</Link>}
                 <div>
                     {user?._id === id || user?.role === 'admin' ? (
                         <Button
                             onClick={onDelete}
-                            sx={{color: 'blue'}}
+                            sx={{color: 'white', marginLeft: '20px'}}
                             disabled={deleteLoading}
                             startIcon={<DeleteIcon />}
                         >

@@ -1,4 +1,4 @@
-import {IPhoto, ValidationError} from '../../types';
+import {GlobalError, IPhoto} from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import {createPhoto, deletePhoto, fetchPhotos, fetchUserPhotos} from "./photosThunk";
@@ -8,7 +8,7 @@ interface PhotosState {
     userPhotos: IPhoto[];
     fetchLoading: boolean;
     fetchLoadingUser: boolean;
-    createError: ValidationError | null;
+    createError: GlobalError | null;
     createLoading: boolean;
     delLoading: boolean;
 }

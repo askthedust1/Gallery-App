@@ -30,7 +30,7 @@ const AppToolbar = () => {
             <Toolbar>
                 <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
                     <Link to="/">
-                        Photo Gallery
+                        <img style={{width: '120px', height: '60px'}} src="https://i.ibb.co/Sd3N2t5/2logo000.png" alt="1logo000" />
                     </Link>
                 </Typography>
                 {user ? <UserMenu user={user}/> : <AnonymousMenu/>}

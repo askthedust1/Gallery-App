@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {IPhoto, PhotoMutation, ValidationError} from "../../types";
+import {GlobalError, IPhoto, PhotoMutation, PhotoResponse} from "../../types";
 import axiosApi from "../../axiosApi";
 import {isAxiosError} from "axios";
 
@@ -16,9 +16,9 @@ export const fetchUserPhotos = createAsyncThunk
 });
 
 export const createPhoto = createAsyncThunk<
-    void,
+    PhotoResponse,
     PhotoMutation,
-    { rejectValue: ValidationError }
+    { rejectValue: GlobalError }
 >(
     'photos/create',
     async (photoMutation, { rejectWithValue }) => {
@@ -34,7 +34,8 @@ export const createPhoto = createAsyncThunk<
                 }
             });
 
-            await axiosApi.post('/photos', formData);
+            const response = await axiosApi.post('/photos', formData);
+            return response.data;
         } catch (e) {
             if (isAxiosError(e) && e.response && e.response.status === 400) {
                 return rejectWithValue(e.response.data);

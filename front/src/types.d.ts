@@ -57,3 +57,8 @@ export interface PhotoMutation {
     image: file | null;
 }
 
+export interface PhotoResponse {
+    photo: IPhoto;
+    message: string;
+}
+

@@ -2,12 +2,10 @@ import express from 'express';
 import { imagesUpload } from '../multer';
 import mongoose from 'mongoose';
 import auth, {RequestWithUser} from "../middleware/auth";
-import permit from "../middleware/permit";
 import Photo from "../models/Photo";
 import {IPhoto} from "../types";
 import config from "../config";
 import * as fs from "fs";
-import User from "../models/User";
 
 const photosRouter = express.Router();
 
@@ -32,6 +30,8 @@ photosRouter.get('/', async (req, res) => {
 photosRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next) => {
         const user = (req as RequestWithUser).user;
 
+        if (!req.body.name) return res.status(400).send({ error: "Name is required!" });
+
         if (!req.file) return res.status(400).send({ error: "Photo is required!" });
 
         const photoData: IPhoto = {
@@ -44,7 +44,7 @@ photosRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next
 
         try {
             await photo.save();
-            return res.send(photo);
+            return res.send({message: 'Success', photo});
         } catch (e) {
             if (e instanceof mongoose.Error.ValidationError) {
                 return res.status(400).send(e);

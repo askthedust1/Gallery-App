@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hook';
-import {selectPhotos, selectPhotosLoading, selectUserPhotos} from "./photosSlice";
+import {selectPhotos, selectPhotosLoading} from "./photosSlice";
 import {fetchPhotos} from "./photosThunk";
 import SpinnerLoading from '../../components/UI/SpinnerLoading/ SpinnerLoading';
 import PhotoItem from "./Components/PhotoItem";
