@@ -35,6 +35,20 @@ const UserPhoto = () => {
         }
     },[dispatch , id]);
 
+    if (userPhotos.length === 0) {
+        return (
+            <div style={{display: 'flex', justifyContent: 'center', marginTop: '30px'}}>
+                <div>
+                    <span style={{color: 'white', fontSize: '30px'}}>No photo!</span>
+                    {user?._id === id ?
+                        <Button sx={{marginLeft: '20px', color: 'darkblue', background:'white'}}
+                                component={Link} to="/add_photo">Add new Photo</Button>
+                        : null}
+                </div>
+            </div>
+        )
+    }
+
     return (
         <section>
             {loading ? <SpinnerLoading/> :
