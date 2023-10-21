@@ -10,7 +10,7 @@ const run = async () => {
 
   try {
     await db.dropCollection("users");
-    await db.dropCollection("images");
+    await db.dropCollection("photos");
   } catch (e) {
     console.log("Collection were not present, skipping drop ...");
   }
