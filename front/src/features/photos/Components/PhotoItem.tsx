@@ -51,7 +51,17 @@ const PhotoItem: React.FC<IProps> = ({ photo, openModal, isUser, id }) => {
           </Link>
         )}
         <div>
-          {user?._id === id || user?.role === "admin" ? (
+          {user && user?._id === id ? (
+            <Button
+              onClick={onDelete}
+              sx={{ color: "white", marginLeft: "20px" }}
+              disabled={deleteLoading}
+              startIcon={<DeleteIcon />}
+            >
+              Delete
+            </Button>
+          ) : null}
+          {user && user?.role === "admin" ? (
             <Button
               onClick={onDelete}
               sx={{ color: "white", marginLeft: "20px" }}
