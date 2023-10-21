@@ -15,7 +15,6 @@ photosRouter.get('/', async (req, res) => {
     try {
         if (req.query.user) {
             const queryId = req.query.user as string;
-            const user = await User.findById(queryId);
             const result = await Photo.find({ user: queryId })
                 .populate('user', 'displayName');
             return res.send(result);
@@ -56,7 +55,7 @@ photosRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next
     },
 );
 
-photosRouter.delete("/:id", auth, permit("admin"), async (req, res, next) => {
+photosRouter.delete("/:id", auth, async (req, res, next) => {
     try {
         const photo_id = req.params.id;
         const photo = await Photo.findOne({ _id: photo_id });

@@ -42,12 +42,11 @@ const UserMenu: React.FC<Props> = ({ user }) => {
             ) : (
                 <img className="user-ava" src="https://i.redd.it/v6fk4w7a76j91.png" alt={user.displayName} />
             )}
-            <Button onClick={handleClick} color="inherit">
+            <Button component={Link} to={'/photos/' + user._id} onClick={handleClick} color="inherit">
                 Hello, {user.displayName}
             </Button>
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-                <MenuItem><Link style={{textDecoration: 'none', color:'black'}} to='/my_cocktails'>My cocktails</Link></MenuItem>
-                <MenuItem><Link style={{textDecoration: 'none', color:'black'}} to='/add_new'>Add new cocktail</Link></MenuItem>
+                <MenuItem><Link style={{textDecoration: 'none', color:'black'}} to={'/photos/' + user._id}>My Gallery</Link></MenuItem>
                 <MenuItem onClick={goOut}>Logout</MenuItem>
             </Menu>
         </>

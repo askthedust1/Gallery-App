@@ -13,7 +13,7 @@ import {Link} from "react-router-dom";
 const UserPhoto = () => {
     const { id } = useParams() as { id:string };
     const dispatch = useAppDispatch();
-    const user = useAppSelector(selectUser)
+    const user = useAppSelector(selectUser);
     const userPhotos = useAppSelector(selectUserPhotos);
     const loading = useAppSelector(selectPhotosCreateLoading);
     const [show, setShow] = useState(false);
@@ -52,6 +52,7 @@ const UserPhoto = () => {
                                 photo={item}
                                 openModal={() => open(item.image)}
                                 isUser={!!id}
+                                id={id}
                             />
                         ))}
                         <ModalUI show={show} image={pic} onClose={closeModal} />
