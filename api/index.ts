@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import usersRouter from './routers/users';
 import cors from 'cors';
 import config from './config';
-import imageRouter from "./routers/photos";
 import photosRouter from "./routers/photos";
 
 const app = express();

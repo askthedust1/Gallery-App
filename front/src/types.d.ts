@@ -42,3 +42,13 @@ export interface GlobalError {
     error: string;
 }
 
+export interface IPhoto {
+    _id: string;
+    name: string;
+    user: {
+        _id: string;
+        displayName: string;
+    },
+    image: string;
+}
+
