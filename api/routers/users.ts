@@ -4,7 +4,7 @@ import { Error } from 'mongoose';
 import { OAuth2Client } from 'google-auth-library';
 import config from '../config';
 import * as crypto from 'crypto';
-import {imagesUpload} from "../ multer";
+import {imagesUpload} from "../multer";
 
 const usersRouter = express.Router();
 

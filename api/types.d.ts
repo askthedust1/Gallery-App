@@ -7,3 +7,9 @@ export interface IUser {
     role: string;
     googleID?: string;
 }
+
+export interface IPhoto {
+    user: string;
+    image: string;
+    name: string;
+}
