@@ -1,11 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {IPhoto, PhotoMutation, RegisterMutation, RegisterResponse, ValidationError} from "../../types";
+import {IPhoto, PhotoMutation, ValidationError} from "../../types";
 import axiosApi from "../../axiosApi";
 import {isAxiosError} from "axios";
 
 export const fetchPhotos = createAsyncThunk<IPhoto[]>
 ('photos/fetchAll', async () => {
     const photosResponse = await axiosApi.get<IPhoto[]>('/photos');
+    return photosResponse.data;
+});
+
+export const fetchUserPhotos = createAsyncThunk
+('photos/fetchUserAll', async (id: string) => {
+    const photosResponse = await axiosApi.get<IPhoto[]>('/photos?user=' + id);
     return photosResponse.data;
 });
 
@@ -38,3 +44,8 @@ export const createPhoto = createAsyncThunk<
         }
     },
 );
+
+
+export const deletePhoto = createAsyncThunk<void, string>('photo/delete', async (id) => {
+    await axiosApi.delete('/photos/' + id);
+});

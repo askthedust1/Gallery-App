@@ -7,16 +7,16 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 560,
+    width: 1000,
+    height: 600,
     bgcolor: 'background.paper',
     border: '2px solid #fff',
     boxShadow: 24,
-    p: 4,
 };
 
 interface Props {
     show: boolean;
-    image: string | undefined;
+    image: string | null;
     onClose: React.MouseEventHandler;
 }
 
@@ -29,7 +29,9 @@ const ModalUi: React.FC<Props> = ({ show, image, onClose }) => {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <img src={apiUrl + '/' + image} alt="image" />
+                <img
+                    style={{width: '1000px', height: '600px', objectFit: 'contain'}}
+                    src={apiUrl + '/' + image} alt="image" />
             </Box>
         </Modal>
     );

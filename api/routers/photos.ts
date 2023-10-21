@@ -7,6 +7,7 @@ import Photo from "../models/Photo";
 import {IPhoto} from "../types";
 import config from "../config";
 import * as fs from "fs";
+import User from "../models/User";
 
 const photosRouter = express.Router();
 
@@ -14,6 +15,7 @@ photosRouter.get('/', async (req, res) => {
     try {
         if (req.query.user) {
             const queryId = req.query.user as string;
+            const user = await User.findById(queryId);
             const result = await Photo.find({ user: queryId })
                 .populate('user', 'displayName');
             return res.send(result);

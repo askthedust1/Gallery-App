@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import PhotoForm from "./features/photos/Components/PhotoForm";
 import {useAppSelector} from "./app/hook";
 import {selectUser} from "./features/users/usersSlice";
+import UserPhoto from "./features/photos/UserPhoto";
 
 const App = () => {
     const user = useAppSelector(selectUser);
@@ -18,6 +19,7 @@ const App = () => {
       <AppToolbar/>
         <Routes>
             <Route path='/' element={<PhotosMain/>}/>
+            <Route path='/photos/:id' element={<UserPhoto/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
 
